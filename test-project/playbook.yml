@@ -1,0 +1,26 @@
+- name: first playbook
+  hosts: all
+  gather_facts: yes
+  become: yes
+  become_method: sudo
+  roles:
+    - { name: ansible-etcd }
+  tasks:
+    - name: Configure /etc/hosts
+      lineinfile:
+        path: /etc/hosts
+        regexp: "^.* tratata.com"
+        line: "127.0.0.1 tratata.com"
+        owner: root
+        group: root
+        mode: '0644'
+    - name: etcd etc directory creation
+      file:
+        state: directory
+        path: /etc/etcd
+    - name: etcd /var/lib/ directory creation
+      file:
+        state: directory
+        path: /var/lib/etcd  
+                    
+

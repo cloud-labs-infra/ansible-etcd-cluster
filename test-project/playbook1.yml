@@ -1,0 +1,50 @@
+- name: not first playbook
+  hosts: all
+  gather_facts: yes
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: create system group
+      ansible.builtin.group:
+        name: etcd
+        state: present
+        system: yes
+    - name: create etcd user
+      ansible.builtin.user:
+        name: etcd
+        groups: etcd
+        append: yes
+        shell: /sbin/nologin
+        state: present
+        system: yes
+    - name: etcd etc directory creation
+      file:
+        state: directory
+        path: /etc/etcd
+    - name: etcd /var/lib/ directory creation
+      file:
+        state: directory
+        path: /var/lib/etcd
+        owner: etcd
+        group: etcd
+    - name: copy etcd unit file
+      ansible.builtin.copy:
+        src: etcd.service
+        dest: /etc/systemd/system/etcd.service
+      notify: 
+        - restart etcd
+  handlers:
+    - name: restart etcd
+      ansible.builtin.systemd:
+        name: etcd.service
+        state: restarted
+        enabled: yes
+        daemon_reload: yes
+    - name: restart etcd service
+      ansible.builtin.service:
+        name: etcd.service
+        state: started
+   # - name: enable etcd
+   #   ansible.builtin.systemd:
+   #     name: etcd.service
+   #     enabled: yes
