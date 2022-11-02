@@ -8,7 +8,7 @@
   - name: Example assertion
     ansible.builtin.assert:
       that: true
-  - name: Check user {{ etcd_user }} exist
+  - name: Check user etcd exist
     ansible.builtin.user:
-      name: "{{ etcd_user }}"
+      name: etcd
       state: present
