@@ -1,0 +1,14 @@
+---
+- name: Create {{ etcd_user }} system group
+  ansible.builtin.group:
+    name: "{{ etcd_user }}"
+    state: present
+    system: yes
+- name: Create {{ etcd_group }} user
+  ansible.builtin.user:
+    name: "{{ etcd_group }}"
+    groups: etcd
+    append: yes
+    shell: /sbin/nologin
+    state: present
+    system: yes

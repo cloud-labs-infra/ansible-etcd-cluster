@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  become: yes
+  tasks:
+    - name: "Include etcd_cluster"
+      include_role:
+        name: "bissquit.etcd_cluster"

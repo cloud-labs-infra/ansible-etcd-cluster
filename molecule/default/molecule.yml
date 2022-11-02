@@ -1,0 +1,17 @@
+---
+dependency:
+  name: galaxy
+  enabled: false
+driver:
+  name: docker
+platforms:
+  - name: instance
+    image: matthewfeickert/docker-python3-ubuntu:3.10.5
+    pre_build_image: true
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      ansible_python_interpreter: /usr/bin/python3
+verifier:
+  name: ansible
