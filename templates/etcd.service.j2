@@ -1,0 +1,19 @@
+# Ansible managed
+[Unit]
+Description=etcd service
+Documentation=https://github.com/etcd-io/etcd
+After=network.target
+
+[Service] 
+User={{ etcd_user }}
+Group={{ etcd_group }}
+Type=notify
+Environment=ETCD_DATA_DIR={{ etcd_data_dir }}
+Environment=ETCD_NAME=%m
+ExecStart={{ etcd_bin_path }}
+Restart=always
+RestartSec=10s
+LimitNOFILE=40000
+
+[Install] 
+WantedBy=multi-user.target

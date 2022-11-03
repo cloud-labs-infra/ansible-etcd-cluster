@@ -5,13 +5,23 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: instance
-    image: matthewfeickert/docker-python3-ubuntu:3.10.5
+  # read about systemd in containers:
+  #   https://molecule.readthedocs.io/en/latest/examples.html#systemd-container
+  - name: molecule_etcd-instance-01
+    hostname: ubuntu
+    # custom docker images with systemd for molecule
+    #   https://github.com/marciopaiva/molecule-systemd-images
+    image: mpaivabarbosa/molecule-systemd-ubuntu:20.04
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
     pre_build_image: true
+    override_command: false
 provisioner:
   name: ansible
-  config_options:
-    defaults:
-      ansible_python_interpreter: /usr/bin/python3
+#  # section below is used to set options in ansible.cfg
+#  config_options:
+#    defaults:
+#      ansible_python_interpreter: /usr/bin/python3
 verifier:
   name: ansible
