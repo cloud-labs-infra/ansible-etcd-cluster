@@ -24,7 +24,7 @@
 
   - name: Check if etcd service is in running state
     ansible.builtin.assert:
-      that: services_state.ansible_facts.services['etcd.service'].state == "started"
+      that: services_state.ansible_facts.services['etcd.service'].state == "running"
     # read more about error handling:
     #   https://docs.ansible.com/ansible/latest/user_guide/playbooks_error_handling.html#error-handling-in-playbooks
     ignore_errors: yes
