@@ -1,13 +1,13 @@
 ---
 # tasks file for yml
-- name: Create etcd system group
+- name: Create {{ etcd_group }} system group
   ansible.builtin.group:
-    name: etcd
+    name: "{{ etcd_group }}"
     state: present
     system: yes
-- name: Create etcd  user
+- name: Create {{ etcd_user }} user
   ansible.builtin.user:
-    name: etcd
+    name: "{{ etcd_user }}"
     groups: etcd
     append: yes
     shell: /sbin/nologin

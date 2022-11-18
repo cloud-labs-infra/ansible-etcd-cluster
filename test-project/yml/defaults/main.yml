@@ -1,2 +1,4 @@
 ---
 # defaults file for yml
+etcd_user: etcd
+etcd_group: etcd
