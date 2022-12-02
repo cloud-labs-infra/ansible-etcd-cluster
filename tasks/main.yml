@@ -27,6 +27,17 @@
     - /etc/etcd
     - "{{ etcd_data_dir }}"
 
+- name: add configuration envs
+  with_items:
+    - f: etcd.conf
+      d: /etc/etcd
+  template:
+    src: '{{ item.f }}.j2'
+    dest: '{{ item.d }}/{{ item.f }}'
+    owner: '{{ etcd_user }}'
+    group: '{{ etcd_group }}'
+    mode: 0644
+      
 - name: Copy systemd template
   ansible.builtin.template:
     src: etcd.service.j2

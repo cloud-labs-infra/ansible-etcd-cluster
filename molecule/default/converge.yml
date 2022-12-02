@@ -10,6 +10,7 @@
     get_url:
       validate_certs: false
   become: yes
+  gather_facts: true
   pre_tasks:
 #    # fixes the following issue:
 #    #   python3-apt must be installed and visible from /usr/bin/python3

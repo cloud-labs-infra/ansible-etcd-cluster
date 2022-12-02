@@ -4,14 +4,21 @@ dependency:
   enabled: false
 driver:
   name: docker
+    #docker_networks:
+    #- name: 'etcd_network'
+    #ipam_config:
+    #  - subnet: '172.18.0.0/24'
 platforms:
   # read about systemd in containers:
   #   https://molecule.readthedocs.io/en/latest/examples.html#systemd-container
-  - name: molecule_etcd-instance-01
-    hostname: ubuntu
+  - &default_platform
+    name: molecule_etcd-instance-01
+    hostname: etcd-instance-01 
     # custom docker images with systemd for molecule
     #   https://github.com/marciopaiva/molecule-systemd-images
     image: mpaivabarbosa/molecule-systemd-ubuntu:20.04
+    groups:
+      - etcd
     command: /sbin/init
     security_opts:
       - seccomp=path/to/seccomp.json
@@ -24,6 +31,21 @@ platforms:
     privileged: true
     pre_build_image: true
     override_command: false
+    networks:
+      - name: etcd_network
+        # ipv4_address: 172.18.0.2
+  - <<: *default_platform
+    name: molecule_etcd-instance-02
+    hostname: etcd-instance-02
+      #networks:
+      #- name: etcd_network
+      #  ipv4_address: 172.18.0.3  
+  - <<: *default_platform
+    name: molecule_etcd-instance-03
+    hostname: etcd-instance-03
+      #networks:
+      #- name: etcd_network
+      #  ipv4_address: 172.18.0.4 
 provisioner:
   name: ansible
 #  # section below is used to set options in ansible.cfg
