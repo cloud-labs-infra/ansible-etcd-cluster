@@ -1,2 +1,8 @@
+# handlers/main.yml
 ---
-# handlers file for etcd_cluster
+
+- name: restart etcd service
+  ansible.builtin.service:
+    name: etcd.service
+    state: started
+    enabled: yes

@@ -1,7 +1,22 @@
 ---
 - name: Converge
   hosts: all
+  module_defaults:
+    # fixes issue with custom certificates if you work behind proxy:
+    #   Request failed: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:997)>
+    #
+    # read more about module_defaults:
+    #   https://docs.ansible.com/ansible/latest/user_guide/playbooks_module_defaults.html
+    get_url:
+      validate_certs: false
   become: yes
+  pre_tasks:
+#    # fixes the following issue:
+#    #   python3-apt must be installed and visible from /usr/bin/python3
+#    - name: Install python3-apt
+#      raw: apt-get install -y python-apt
+  roles:
+    - { role: andrewrothstein.etcd }
   tasks:
     - name: "Include etcd_cluster"
       include_role:

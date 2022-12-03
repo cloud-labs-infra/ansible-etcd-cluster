@@ -5,9 +5,6 @@
   hosts: all
   gather_facts: false
   tasks:
-  - name: Example assertion
-    ansible.builtin.assert:
-      that: true
   - name: Check user etcd exist
     ansible.builtin.user:
       name: etcd
