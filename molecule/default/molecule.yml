@@ -37,12 +37,16 @@ platforms:
   - <<: *default_platform
     name: molecule_etcd-instance-02
     hostname: etcd-instance-02
+    groups:
+      - etcd
       #networks:
       #- name: etcd_network
       #  ipv4_address: 172.18.0.3  
   - <<: *default_platform
     name: molecule_etcd-instance-03
     hostname: etcd-instance-03
+    groups:
+      - etcd
       #networks:
       #- name: etcd_network
       #  ipv4_address: 172.18.0.4 
