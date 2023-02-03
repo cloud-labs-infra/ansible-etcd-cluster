@@ -12,7 +12,7 @@ platforms:
   # read about systemd in containers:
   #   https://molecule.readthedocs.io/en/latest/examples.html#systemd-container
   - &default_platform
-    name: molecule_etcd-instance-01
+    name: etcd-instance-01
     hostname: etcd-instance-01 
     # custom docker images with systemd for molecule
     #   https://github.com/marciopaiva/molecule-systemd-images
@@ -35,7 +35,7 @@ platforms:
       - name: etcd_network
         # ipv4_address: 172.18.0.2
   - <<: *default_platform
-    name: molecule_etcd-instance-02
+    name: etcd-instance-02
     hostname: etcd-instance-02
     groups:
       - etcd
@@ -43,7 +43,7 @@ platforms:
       #- name: etcd_network
       #  ipv4_address: 172.18.0.3  
   - <<: *default_platform
-    name: molecule_etcd-instance-03
+    name: etcd-instance-03
     hostname: etcd-instance-03
     groups:
       - etcd
