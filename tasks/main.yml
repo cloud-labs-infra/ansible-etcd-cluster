@@ -1,22 +1,6 @@
 # tasks/main.yml
 ---
 
-
-#- name: 123
-#  debug:
-#    var: "{% for host in groups['etcd'] %}{{ hostvars[host]['ansible_facts']['ansible_default_ipv4'] }} {% endfor %}"
-
-#- name: setup
-#  setup:
-
-  #- name: 123
-  #  debug:
-  # var: "{% for host in groups['etcd'] %}{{ hostvars[host]['ansible_facts']['default_ipv4'] }} {% endfor %}"
-
-
-    #- name: clear facts
-    #meta: clear_facts
-
 - name: install necessary packages
   apt:
     pkg:
@@ -27,13 +11,10 @@
 - name: collect facts
   setup:
 
-- name: Display all variables/facts known for a host
-  ansible.builtin.debug:
-    var: ansible_facts
-    #[ansible_facts][hostname]
-      #verbosity: 4
-
-
+    # - name: Display all variables/facts known for a host
+    #ansible.builtin.debug:
+    #var: ansible_facts
+   
 - name: Create {{ etcd_user }} system group
   ansible.builtin.group:
     name: "{{ etcd_user }}"
@@ -64,7 +45,7 @@
 #  ansible.builtin.debug:
 #    var: ansible_hostname
       
-- name: add configuration envs
+- name: add configuration
   with_items:
     - f: etcd.conf.yaml
       d: /etc/etcd
