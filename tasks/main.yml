@@ -1,15 +1,18 @@
 # tasks/main.yml
 ---
 
+# the package is needed to provide ipv4 address when gathering facts.
+# ipv4 address is needed for the initial_cluster configuration
+
 - name: install necessary packages
-  apt:
+  ansible.builtin.apt:
     pkg:
       - iproute2
     state: latest
     update_cache: true
 
 - name: collect facts
-  setup:
+  ansible.builtin.setup:
 
     # - name: Display all variables/facts known for a host
     #ansible.builtin.debug:
@@ -31,7 +34,7 @@
     system: yes
 
 - name: Prepare directories
-  file:
+  ansible.builtin.file:
     state: directory
     path: "{{ item }}"
     owner: "{{ etcd_user }}"
@@ -40,15 +43,10 @@
   loop:
     - /etc/etcd
     - "{{ etcd_data_dir }}"
-
-#- name: check ip
-#  ansible.builtin.debug:
-#    var: ansible_hostname
-      
+  
 - name: add configuration
-  with_items:
-    - f: etcd.conf.yaml
-      d: /etc/etcd
+  loop:
+    - { f: etcd.conf.yaml, d: /etc/etcd }
   template:
     src: '{{ item.f }}.j2'
     dest: '{{ item.d }}/{{ item.f }}'
@@ -60,4 +58,7 @@
   ansible.builtin.template:
     src: etcd.service.j2
     dest: /etc/systemd/system/etcd.service
+    owner: "{{ etcd_user }}"
+    group: "{{ etcd_group }}"
+    mode: 0644
   notify: restart etcd service

@@ -33,23 +33,16 @@ platforms:
     override_command: false
     networks:
       - name: etcd_network
-        # ipv4_address: 172.18.0.2
   - <<: *default_platform
     name: etcd-instance-02
     hostname: etcd-instance-02
     groups:
       - etcd
-      #networks:
-      #- name: etcd_network
-      #  ipv4_address: 172.18.0.3  
   - <<: *default_platform
     name: etcd-instance-03
     hostname: etcd-instance-03
     groups:
-      - etcd
-      #networks:
-      #- name: etcd_network
-      #  ipv4_address: 172.18.0.4 
+      - etcd 
 provisioner:
   name: ansible
 #  # section below is used to set options in ansible.cfg
