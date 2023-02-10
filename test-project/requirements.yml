@@ -1,4 +1,0 @@
-- src: https://github.com/andrewrothstein/ansible-etcd.git
-  scm: git
-  version: v2.2.0
-  name: ansible-etcd

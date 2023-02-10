@@ -2,7 +2,7 @@
 ---
 
 - name: restart etcd service
-  ansible.builtin.service:
-    name: etcd.service
+  ansible.builtin.systemd:
+    name: etcd
     state: started
     enabled: yes

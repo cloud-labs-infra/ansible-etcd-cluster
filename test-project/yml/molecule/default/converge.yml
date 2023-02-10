@@ -1,8 +1,0 @@
----
-- name: Converge
-  hosts: all
-  become: yes
-  tasks:
-    - name: "Include playbook1.yml"
-      include_role:
-        name: "playbook1.yml"

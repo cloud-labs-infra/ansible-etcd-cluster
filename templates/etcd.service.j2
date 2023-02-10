@@ -8,10 +8,7 @@ After=network.target
 User={{ etcd_user }}
 Group={{ etcd_group }}
 Type=notify
-Environment=ETCD_DATA_DIR={{ etcd_data_dir }}
-Environment=ETCD_NAME=%m
-Environment=ETCD_DEBUG=true
-ExecStart={{ etcd_bin_path }}
+ExecStart={{ etcd_bin_path }} --config-file {{ etcd_config_file }}
 Restart=always
 RestartSec=10s
 LimitNOFILE=40000

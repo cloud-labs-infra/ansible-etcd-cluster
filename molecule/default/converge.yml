@@ -1,6 +1,6 @@
 ---
 - name: Converge
-  hosts: all
+  hosts: etcd
   module_defaults:
     # fixes issue with custom certificates if you work behind proxy:
     #   Request failed: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:997)>
@@ -10,6 +10,7 @@
     get_url:
       validate_certs: false
   become: yes
+  gather_facts: true
   pre_tasks:
 #    # fixes the following issue:
 #    #   python3-apt must be installed and visible from /usr/bin/python3
@@ -18,6 +19,8 @@
   roles:
     - { role: andrewrothstein.etcd }
   tasks:
+    #    - name: clear facts
+    #  meta: clear_facts
     - name: "Include etcd_cluster"
       include_role:
         name: "bissquit.etcd_cluster"

@@ -3,3 +3,4 @@ etcd_user: etcd
 etcd_group: etcd
 etcd_data_dir: /var/lib/etcd
 etcd_bin_path: /usr/local/bin/etcd
+etcd_config_file: /etc/etcd/etcd.conf.yaml
