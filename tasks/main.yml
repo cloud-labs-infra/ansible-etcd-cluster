@@ -1,13 +1,10 @@
 # tasks/main.yml
 ---
 
-# the package is needed to provide ipv4 address when gathering facts.
-# ipv4 address is needed for the initial_cluster configuration
-
-- name: install necessary packages
+- name: Install necessary packages
   ansible.builtin.apt:
     pkg:
-      - iproute2
+      - iproute2  # provides network facts
     state: latest
     update_cache: true
 
