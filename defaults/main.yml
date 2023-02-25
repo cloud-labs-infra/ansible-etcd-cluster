@@ -1,6 +1,46 @@
 ---
+
+# Member flags
+etcd_node_name: "{{ inventory_hostname }}"
+etcd_data_dir: /var/lib/etcd
+etcd_wal_dir:
+etcd_snapshot_count: 100000  # 100000 by default
+etcd_heartbeat_interval: 100  # 100 by default
+etcd_election_timeout: 1000  # 1000 by default
+etcd_initial_election_tick_advance: true
+etcd_listen_peer_urls: "http://{{ hostvars[inventory_hostname]['ansible_facts']['default_ipv4']['address'] }}:2380,http://127.0.0.1:2380"
+etcd_listen_client_urls: "http://{{ hostvars[inventory_hostname]['ansible_facts']['default_ipv4']['address'] }}:2379,http://127.0.0.1:2379"
+etcd_max_snapshots: 5
+etcd_max_wals: 5
+etcd_cors: ""
+etcd_quota_backend_bytes: 0
+etcd_backend_batch_limit: 0
+etcd_backend_bbolt_freelist_type: ""
+etcd_backend_batch_interval: 0
+etcd_max_txn_ops: 128
+etcd_max_request_bytes: 1572864
+etcd_grpc_keepalive_min_time: 5s
+etcd_grpc_keepalive_interval: 2h
+etcd_grpc_keepalive_timeout: 20s
+# Clustering flags
+etcd_initial_advertise_peer_urls: "http://{{ hostvars[inventory_hostname]['ansible_facts']['default_ipv4']['address'] }}:2380"
+etcd_initial_cluster: "{% for host in groups['etcd'] %}{{ hostvars[host]['ansible_facts']['hostname'] }}=http://{{ hostvars[host]['ansible_facts']['default_ipv4']['address'] }}:2380{% if not loop.last %},{% endif %}{% endfor %}"
+etcd_initial_cluster_state: new
+etcd_initial_cluster_token: etcd-cluster
+etcd_advertise_client_urls: "http://{{ hostvars[inventory_hostname]['ansible_facts']['default_ipv4']['address'] }}:2379"
+etcd_discovery: ""
+etcd_discovery_srv: ""
+etcd_discovery_srv_name: ""
+etcd_discovery_fallback: proxy
+etcd_discovery_proxy: ""
+etcd_strict_reconfig_check: true
+etcd_auto_compaction_retention: 0
+etcd_auto_compaction_mode: periodic
+etcd_enable_v2: false
+
+
 etcd_user: etcd
 etcd_group: etcd
-etcd_data_dir: /var/lib/etcd
+
 etcd_bin_path: /usr/local/bin/etcd
 etcd_config_file: /etc/etcd/etcd.conf.yaml
