@@ -12,7 +12,7 @@ platforms:
       - etcd
     command: /sbin/init
     security_opts:
-      - seccomp=path/to/seccomp.json
+      - seccomp=unconfined
     volumes:
      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
