@@ -67,6 +67,10 @@ etcd_log_outputs: default
 etcd_log_level: info
 etcd_debug: false
 etcd_log_package_levels: ""
+# Unsafe flags
+etcd_force_new_cluster: false  # be careful changing this value!
+
+
 
 
 etcd_user: etcd
