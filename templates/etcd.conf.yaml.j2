@@ -282,5 +282,34 @@ peer-cert-allowed-hostname: {{ etcd_peer_cert_allowed_hostname }}
 # default: ""
 cipher-suites: {{ etcd_cipher_suites }}
 
+## Logging flags
 
-debug: true
+# Available from v3.4. WARNING: --logger=capnslog to be deprecated in v3.5.
+# Specify ‘zap’ for structured logging or ‘capnslog’.
+# default: capnslog
+logger: {{ etcd_logger }}
+
+# Specify ‘stdout’ or ‘stderr’ to skip journald logging even when running under systemd, or list
+# of comma separated output targets.
+# ‘default’ use ‘stderr’ config for v3.4 during zap logger migraion
+# default: default
+log-outputs: {{ etcd_log_outputs }}
+
+# Available from v3.4.
+# Configures log level. Only supports debug, info, warn, error, panic, or fatal.
+# ‘default’ use ‘info’.
+# default: info
+log-level: {{ etcd_log_level }}
+
+# WARNING: to be deprecated in v3.5.
+# Drop the default log level to DEBUG for all subpackages.
+# default: false (INFO for all packages)
+debug:  {{ etcd_debug }}
+
+# WARNING: to be deprecated in v3.5.
+# Set individual etcd subpackages to specific log levels.
+# An example being etcdserver=WARNING,security=DEBUG
+# default: "" (INFO for all packages)
+log-package-levels: {{ etcd_log_package_levels }}
+
+

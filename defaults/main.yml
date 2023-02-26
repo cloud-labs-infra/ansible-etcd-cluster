@@ -61,7 +61,12 @@ etcd_peer_auto_tls: false
 etcd_peer_cert_allowed_cn: ""
 etcd_peer_cert_allowed_hostname: ""
 etcd_cipher_suites: ""
-
+# Logging flags
+etcd_logger: capnslog
+etcd_log_outputs: default
+etcd_log_level: info
+etcd_debug: false
+etcd_log_package_levels: ""
 
 
 etcd_user: etcd
