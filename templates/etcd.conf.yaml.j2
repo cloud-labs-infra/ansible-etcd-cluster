@@ -204,7 +204,8 @@ proxy-read-timeout: {{ etcd_proxy_read_timeout }}
 ## Security flags
 
 # DEPRECATED
-# Path to the client server TLS CA file. --ca-file ca.crt could be replaced by --trusted-ca-file ca.crt --client-cert-auth and etcd will perform the same.
+# Path to the client server TLS CA file. --ca-file ca.crt could be replaced by --trusted-ca-file ca.crt
+# --client-cert-auth and etcd will perform the same.
 # default: ""
 # ca-file:
 
@@ -238,15 +239,18 @@ trusted-ca-file: {{ etcd_trusted_ca_file }}
 auto-tls: {{ etcd_auto_tls }}
 
 # DEPRECATED
-# Path to the peer server TLS CA file. --peer-ca-file ca.crt could be replaced by --peer-trusted-ca-file ca.crt --peer-client-cert-auth and etcd will perform the same.
+# Path to the peer server TLS CA file. --peer-ca-file ca.crt could be replaced by --peer-trusted-ca-file
+# ca.crt --peer-client-cert-auth and etcd will perform the same.
 # default: ""
 #peer-ca-file:
 
-# Path to the peer server TLS cert file. This is the cert for peer-to-peer traffic, used both for server and client.
+# Path to the peer server TLS cert file. This is the cert for peer-to-peer traffic, used both for
+# server and client.
 # default: ""
 peer-cert-file: {{ etcd_peer_cert_file }}
 
-# Path to the peer server TLS key file. This is the key for peer-to-peer traffic, used both for server and client.
+# Path to the peer server TLS key file. This is the key for peer-to-peer traffic, used both for
+# server and client.
 # default: ""
 peer-key-file: {{ etcd_peer_key_file }}
 
