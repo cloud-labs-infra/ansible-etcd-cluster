@@ -69,7 +69,20 @@ etcd_debug: false
 etcd_log_package_levels: ""
 # Unsafe flags
 etcd_force_new_cluster: false  # be careful changing this value!
-
+# Miscellaneous flags
+etcd_version: false
+etcd_config_file: /etc/etcd/etcd.conf.yaml  # this param won't be in config file, only in systemd unit
+# Profiling flags
+etcd_enable_pprof: false
+etcd_metrics: basic
+etcd_listen_metrics_urls: ""
+# Auth flags
+etcd_auth_token: simple
+etcd_bcrypt_cost: 10
+# Experimental flags
+etcd_experimental_corrupt_check_time: 0s
+etcd_experimental_compaction_batch_limit: 1000
+etcd_experimental_peer_skip_client_san_verification: false
 
 
 
@@ -77,4 +90,3 @@ etcd_user: etcd
 etcd_group: etcd
 
 etcd_bin_path: /usr/local/bin/etcd
-etcd_config_file: /etc/etcd/etcd.conf.yaml
