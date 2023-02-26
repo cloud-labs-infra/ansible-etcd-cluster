@@ -4,9 +4,9 @@
 etcd_node_name: "{{ inventory_hostname }}"
 etcd_data_dir: /var/lib/etcd
 etcd_wal_dir:
-etcd_snapshot_count: 100000  # 100000 by default
-etcd_heartbeat_interval: 100  # 100 by default
-etcd_election_timeout: 1000  # 1000 by default
+etcd_snapshot_count: 100000
+etcd_heartbeat_interval: 100
+etcd_election_timeout: 1000
 etcd_initial_election_tick_advance: true
 etcd_listen_peer_urls: "http://{{ hostvars[inventory_hostname]['ansible_facts']['default_ipv4']['address'] }}:2380,http://127.0.0.1:2380"
 etcd_listen_client_urls: "http://{{ hostvars[inventory_hostname]['ansible_facts']['default_ipv4']['address'] }}:2379,http://127.0.0.1:2379"
@@ -37,6 +37,14 @@ etcd_strict_reconfig_check: true
 etcd_auto_compaction_retention: 0
 etcd_auto_compaction_mode: periodic
 etcd_enable_v2: false
+# Proxy flags
+etcd_proxy: off
+etcd_proxy_failure_wait: 5000
+etcd_proxy_refresh_interval: 30000
+etcd_proxy_dial_timeout: 1000
+etcd_proxy_write_timeout: 5000
+etcd_proxy_read_timeout: 0
+
 
 
 etcd_user: etcd

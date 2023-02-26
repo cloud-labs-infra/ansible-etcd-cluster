@@ -104,7 +104,9 @@ grpc-keepalive-timeout: {{ etcd_grpc_keepalive_timeout }}
 
 ## Clustering flags
 
-# List of this member’s peer URLs to advertise to the rest of the cluster. These addresses are used for communicating etcd data around the cluster. At least one must be routable to all cluster members. These URLs can contain domain names.
+# List of this member’s peer URLs to advertise to the rest of the cluster. These addresses are
+# used for communicating etcd data around the cluster. At least one must be routable to all
+# cluster members. These URLs can contain domain names.
 # default: “http://localhost:2380”
 initial-advertise-peer-urls: {{ etcd_initial_advertise_peer_urls }}
 
@@ -160,13 +162,43 @@ strict-reconfig-check: {{ etcd_strict_reconfig_check }}
 # default: 0
 auto-compaction-retention: {{ etcd_auto_compaction_retention }}
 
-# Interpret ‘auto-compaction-retention’ one of: ‘periodic’, ‘revision’. ‘periodic’ for duration based retention, defaulting to hours if no time unit is provided (e.g. ‘5m’). ‘revision’ for revision number based retention.
+# Interpret ‘auto-compaction-retention’ one of: ‘periodic’, ‘revision’. ‘periodic’ for duration
+# based retention, defaulting to hours if no time unit is provided (e.g. ‘5m’). ‘revision’ for
+# revision number based retention.
 # default: periodic
 auto-compaction-mode: {{ etcd_auto_compaction_mode }}
 
 # Accept etcd V2 client requests
 # default: false
 enable-v2: {{ etcd_enable_v2 }}
+
+## Proxy flags
+
+# Proxy mode setting (“off”, “readonly” or “on”).
+# default: “off”
+proxy: {{ etcd_proxy }}
+
+# Time (in milliseconds) an endpoint will be held in a failed state before being reconsidered for
+# proxied requests.
+# default: 5000
+proxy-failure-wait: {{ etcd_proxy_failure_wait }}
+
+# Time (in milliseconds) of the endpoints refresh interval.
+# default: 30000
+proxy-refresh-interval: {{ etcd_proxy_refresh_interval }}
+
+# Time (in milliseconds) for a dial to timeout or 0 to disable the timeout
+# default: 1000
+proxy-dial-timeout: {{ etcd_proxy_dial_timeout }}
+
+# Time (in milliseconds) for a write to timeout or 0 to disable the timeout.
+# default: 5000
+proxy-write-timeout: {{ etcd_proxy_write_timeout }}
+
+# Time (in milliseconds) for a read to timeout or 0 to disable the timeout.
+# Don’t change this value if using watches because use long polling requests.
+# default: 0
+proxy-read-timeout: {{ etcd_proxy_read_timeout }}
 
 
 
