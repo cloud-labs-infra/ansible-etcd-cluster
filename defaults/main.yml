@@ -44,6 +44,23 @@ etcd_proxy_refresh_interval: 30000
 etcd_proxy_dial_timeout: 1000
 etcd_proxy_write_timeout: 5000
 etcd_proxy_read_timeout: 0
+## Security flags
+etcd_cert_file: ""
+etcd_key_file: ""
+etcd_client_cert_auth: false
+etcd_client_crl_file: ""
+etcd_client_cert_allowed_hostname: ""
+etcd_trusted_ca_file: ""
+etcd_auto_tls: false
+etcd_peer_cert_file: ""
+etcd_peer_key_file: ""
+etcd_peer_client_cert_auth: false
+etcd_peer_crl_file: false
+etcd_peer_trusted_ca_file: ""
+etcd_peer_auto_tls: false
+etcd_peer_cert_allowed_cn: ""
+etcd_peer_cert_allowed_hostname: ""
+etcd_cipher_suites: ""
 
 
 
