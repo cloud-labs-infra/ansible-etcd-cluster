@@ -1,0 +1,56 @@
+---
+
+- name: Collect facts about systemd services
+  ansible.builtin.service_facts:
+  register: services_state
+
+- name: Debug
+  ansible.builtin.debug:
+    var: services_state.ansible_facts.services['etcd.service']
+
+- name: Check if etcd service is in running state
+  ansible.builtin.assert:
+    that: services_state.ansible_facts.services['etcd.service'].state == "running"
+  # read more about error handling:
+  #   https://docs.ansible.com/ansible/latest/user_guide/playbooks_error_handling.html#error-handling-in-playbooks
+  ignore_errors: yes
+  register: etcd_state
+
+# example how to handle and debug errors
+- name: Debug systemd unit if it's failed
+  block:
+    - name: Debug etcd using journalctl
+      ansible.builtin.shell: |
+        journalctl -xe | tail -n 100
+      register: etcd_journalctl
+
+    - name: Print journalctl output
+      ansible.builtin.debug:
+        var: etcd_journalctl
+
+    - name: Raise error
+      ansible.builtin.fail:
+        msg: Tests failed due to systemd unit state issue
+  when: etcd_state.failed is true
+
+- name: Check request results etcd
+  block:
+    - name: send put request
+      ansible.builtin.shell:
+        etcdctl put foo bar
+      register: etcd_put_reply
+
+    - name: print put request reply
+      ansible.builtin.debug:
+        var: etcd_put_reply
+
+    - name: send get request
+      ansible.builtin.shell:
+        etcdctl get foo
+      register: etcd_get_reply
+
+    - name: print get request reply
+      ansible.builtin.debug:
+        var: etcd_get_reply
+
+

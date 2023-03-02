@@ -1,7 +1,6 @@
 ---
 dependency:
   name: galaxy
-  enabled: false
 driver:
   name: docker
     #docker_networks:
@@ -9,10 +8,7 @@ driver:
     #ipam_config:
     #  - subnet: '172.18.0.0/24'
 platforms:
-  # read about systemd in containers:
-  #   https://molecule.readthedocs.io/en/latest/examples.html#systemd-container
-  - &default_platform
-    name: etcd-instance-01
+  - name: etcd-instance-01
     hostname: etcd-instance-01 
     # custom docker images with systemd for molecule
     #   https://github.com/marciopaiva/molecule-systemd-images
@@ -21,7 +17,7 @@ platforms:
       - etcd
     command: /sbin/init
     security_opts:
-      - seccomp=path/to/seccomp.json
+      - seccomp=unconfined
     # if you're using latest versions of ubuntu (22.04), check your default cgroup version.
     # command: stat -c %T -f /sys/fs/cgroup
     # if it is cgroup2fs, then change /etc/default/grub file, GRUB_CMDLINE_LINUX="systemd.unified_cgroup_hierarchy=0"
@@ -33,16 +29,6 @@ platforms:
     override_command: false
     networks:
       - name: etcd_network
-  - <<: *default_platform
-    name: etcd-instance-02
-    hostname: etcd-instance-02
-    groups:
-      - etcd
-  - <<: *default_platform
-    name: etcd-instance-03
-    hostname: etcd-instance-03
-    groups:
-      - etcd 
 provisioner:
   name: ansible
 #  # section below is used to set options in ansible.cfg
