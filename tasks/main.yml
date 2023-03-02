@@ -11,20 +11,16 @@
 - name: Collect facts
   ansible.builtin.setup:
 
-    # - name: Display all variables/facts known for a host
-    #ansible.builtin.debug:
-    #var: ansible_facts
-   
 - name: Create {{ etcd_user }} system group
   ansible.builtin.group:
-    name: "{{ etcd_user }}"
+    name: "{{ etcd_group }}"
     state: present
     system: yes
 
 - name: Create {{ etcd_group }} system user
   ansible.builtin.user:
-    name: "{{ etcd_group }}"
-    groups: etcd
+    name: "{{ etcd_user }}"
+    groups: "{{ etcd_group }}"
     append: yes
     shell: /sbin/nologin
     state: present
@@ -38,18 +34,18 @@
     group: "{{ etcd_group }}"
     mode: 0750
   loop:
-    - /etc/etcd
+    - "{{ etcd_conf_dir }}"
     - "{{ etcd_data_dir }}"
   
-- name: add configuration
-  template:
-    src: '{{ item.f }}.j2'
-    dest: '{{ item.d }}/{{ item.f }}'
+- name: Add configuration
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: '{{ etcd_conf_dir }}/{{ item }}'
     owner: '{{ etcd_user }}'
     group: '{{ etcd_group }}'
     mode: 0644
   loop:
-    - { f: etcd.conf.yaml, d: /etc/etcd }
+    - etcd.conf.yaml
       
 - name: Copy systemd template
   ansible.builtin.template:
