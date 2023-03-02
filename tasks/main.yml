@@ -4,6 +4,9 @@
 - ansible.builtin.include_tasks:
     file: preflight.yml
 
+- ansible.builtin.include_tasks:
+    file: environment.yml
+
 - name: Install prerequisites
   ansible.builtin.apt:
     name:
@@ -40,7 +43,7 @@
     - "{{ etcd_conf_dir }}"
     - "{{ etcd_data_dir }}"
   
-- name: Add configuration
+- name: Copy configuration
   ansible.builtin.template:
     src: "{{ item }}.j2"
     dest: '{{ etcd_conf_dir }}/{{ item }}'
@@ -49,6 +52,7 @@
     mode: 0644
   loop:
     - etcd.conf.yaml
+  notify: restart etcd service
       
 - name: Copy systemd template
   ansible.builtin.template:
