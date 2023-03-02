@@ -1,0 +1,17 @@
+---
+
+- name: Set client connection protocol
+  ansible.builtin.set_fact:
+    etcd_client_protocol: "https"
+  when: |
+    ( etcd_cert_file is defined and etcd_cert_file != "" )
+    and
+    ( etcd_key_file is defined and etcd_key_file != "" )
+
+- name: Set peer connection protocol
+  ansible.builtin.set_fact:
+    etcd_peer_protocol: "https"
+  when: |
+    ( etcd_peer_cert_file is defined and etcd_peer_cert_file != "" )
+    and
+    ( etcd_peer_key_file is defined and etcd_peer_key_file != "" )
