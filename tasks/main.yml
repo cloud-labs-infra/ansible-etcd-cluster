@@ -1,6 +1,9 @@
 # tasks/main.yml
 ---
 
+- ansible.builtin.include_tasks:
+    file: preflight.yml
+
 - name: Install prerequisites
   ansible.builtin.apt:
     name:

@@ -1,0 +1,49 @@
+---
+
+- name: Check etcd_cert_file is defined properly
+  ansible.builtin.assert:
+    that:
+      - etcd_cert_file is defined
+      - etcd_cert_file != ""
+    fail_msg: Client cert file (etcd_cert_file) should be defined when key file is defined
+  when: etcd_key_file is defined and etcd_key_file != ""
+
+- name: Check etcd_key_file is defined properly
+  ansible.builtin.assert:
+    that:
+      - etcd_key_file is defined
+      - etcd_key_file != ""
+    fail_msg: Client key file (etcd_key_file) should be defined when cert file is defined
+  when: etcd_cert_file is defined and etcd_cert_file != ""
+
+- name: Check etcd_trusted_ca_file is defined properly
+  ansible.builtin.assert:
+    that:
+      - etcd_trusted_ca_file is defined
+      - etcd_trusted_ca_file != ""
+    fail_msg: Trusted ca cert file (etcd_trusted_ca_file) should be defined when client cert auth is true
+  when: etcd_client_cert_auth is true and etcd_client_cert_auth != ""
+
+- name: Check etcd_peer_cert_file is defined properly
+  ansible.builtin.assert:
+    that:
+      - etcd_peer_cert_file is defined
+      - etcd_peer_cert_file != ""
+    fail_msg: Peer cert file (etcd_peer_cert_file) should be defined when key file is defined
+  when: etcd_peer_key_file is defined and etcd_peer_key_file != ""
+
+- name: Check etcd_peer_key_file is defined properly
+  ansible.builtin.assert:
+    that:
+      - etcd_peer_key_file is defined
+      - etcd_peer_key_file != ""
+    fail_msg: Peer key file (etcd_peer_key_file) should be defined when cert file is defined
+  when: etcd_peer_cert_file is defined and etcd_peer_cert_file != ""
+
+- name: Check etcd_peer_key_file is defined properly
+  ansible.builtin.assert:
+    that:
+      - etcd_peer_trusted_ca_file is defined
+      - etcd_peer_trusted_ca_file != ""
+    fail_msg: Trusted ca cert file (etcd_peer_trusted_ca_file) should be defined when peer cert auth is true
+  when: etcd_peer_client_cert_auth is true and etcd_peer_client_cert_auth != ""
