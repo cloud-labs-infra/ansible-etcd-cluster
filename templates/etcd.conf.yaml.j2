@@ -1,11 +1,11 @@
 # {{ ansible_managed }}
 ## Member flags
 
-# This value is referenced as this node’s own entries listed in the --initial-cluster flag
+# This value is referenced as this node's own entries listed in the --initial-cluster flag
 # (e.g., default=http://localhost:2380). This needs to match the key used in the flag if using
 # static bootstrapping. When using discovery, each member must have a unique name. Hostname or
 # machine-id can be a good choice.
-name: {{ etcd_node_name }}
+name: '{{ etcd_node_name }}'
 
 # Path to the data directory
 data-dir: {{ etcd_data_dir }}
@@ -92,20 +92,20 @@ max-txn-ops: {{ etcd_max_txn_ops }}
 max-request-bytes: {{ etcd_max_request_bytes }}
 
 # Minimum duration interval that a client should wait before pinging server.
-# default: 5s
+# default (sec): 5
 grpc-keepalive-min-time: {{ etcd_grpc_keepalive_min_time }}
 
 # Frequency duration of server-to-client ping to check if a connection is alive (0 to disable).
-# default: 2h
+# default (sec): 7200
 grpc-keepalive-interval: {{ etcd_grpc_keepalive_interval }}
 
 # Additional duration of wait before closing a non-responsive connection (0 to disable).
-# default: 20s
+# default (sec): 20
 grpc-keepalive-timeout: {{ etcd_grpc_keepalive_timeout }}
 
 ## Clustering flags
 
-# List of this member’s peer URLs to advertise to the rest of the cluster. These addresses are
+# List of this member's peer URLs to advertise to the rest of the cluster. These addresses are
 # used for communicating etcd data around the cluster. At least one must be routable to all
 # cluster members. These URLs can contain domain names.
 # default: "http://localhost:2380"
@@ -125,9 +125,9 @@ initial-cluster-state: {{ etcd_initial_cluster_state }}
 
 # Initial cluster token for the etcd cluster during bootstrap.
 # default: "etcd-cluster"
-initial-cluster-token: {{ etcd_initial_cluster_token }}
+initial-cluster-token: '{{ etcd_initial_cluster_token }}'
 
-# List of this member’s client URLs to advertise to the rest of the cluster. These URLs can contain
+# List of this member's client URLs to advertise to the rest of the cluster. These URLs can contain
 # domain names.
 # Be careful if advertising URLs such as http://localhost:2379 from a cluster member and are using
 # the proxy feature of etcd. This will cause loops, because the proxy will be forwarding requests
@@ -149,7 +149,7 @@ discovery-srv-name: {{ etcd_discovery_srv_name }}
 
 # Expected behavior ("exit" or "proxy") when discovery services fails. "proxy" supports v2 API only.
 # default: "proxy"
-discovery-fallback: {{ etcd_discovery_fallback }}
+discovery-fallback: '{{ etcd_discovery_fallback }}'
 
 # HTTP proxy to use for traffic to discovery service.
 # default: ""
@@ -161,10 +161,10 @@ strict-reconfig-check: {{ etcd_strict_reconfig_check }}
 
 # Auto compaction retention for mvcc key value store in hour. 0 means disable auto compaction.
 # default: 0
-auto-compaction-retention: {{ etcd_auto_compaction_retention }}
+auto-compaction-retention: '{{ etcd_auto_compaction_retention }}'
 
-# Interpret ‘auto-compaction-retention’ one of: ‘periodic’, ‘revision’. ‘periodic’ for duration
-# based retention, defaulting to hours if no time unit is provided (e.g. ‘5m’). ‘revision’ for
+# Interpret 'auto-compaction-retention' one of: 'periodic', 'revision'. 'periodic' for duration
+# based retention, defaulting to hours if no time unit is provided (e.g. '5m'). 'revision' for
 # revision number based retention.
 # default: periodic
 auto-compaction-mode: {{ etcd_auto_compaction_mode }}
@@ -177,7 +177,7 @@ enable-v2: {{ etcd_enable_v2 }}
 
 # Proxy mode setting ("off", "readonly" or "on").
 # default: "off"
-proxy: {{ etcd_proxy }}
+proxy: '{{ etcd_proxy }}'
 
 # Time (in milliseconds) an endpoint will be held in a failed state before being reconsidered for
 # proxied requests.
@@ -197,7 +197,7 @@ proxy-dial-timeout: {{ etcd_proxy_dial_timeout }}
 proxy-write-timeout: {{ etcd_proxy_write_timeout }}
 
 # Time (in milliseconds) for a read to timeout or 0 to disable the timeout.
-# Don’t change this value if using watches because use long polling requests.
+# Don't change this value if using watches because use long polling requests.
 # default: 0
 proxy-read-timeout: {{ etcd_proxy_read_timeout }}
 
@@ -286,19 +286,19 @@ cipher-suites: {{ etcd_cipher_suites }}
 ## Logging flags
 
 # Available from v3.4. WARNING: --logger=capnslog to be deprecated in v3.5.
-# Specify ‘zap’ for structured logging or ‘capnslog’.
+# Specify 'zap' for structured logging or 'capnslog'.
 # default: capnslog
 logger: {{ etcd_logger }}
 
-# Specify ‘stdout’ or ‘stderr’ to skip journald logging even when running under systemd, or list
+# Specify 'stdout' or 'stderr' to skip journald logging even when running under systemd, or list
 # of comma separated output targets.
-# ‘default’ use ‘stderr’ config for v3.4 during zap logger migraion
+# 'default' use 'stderr' config for v3.4 during zap logger migraion
 # default: default
 log-outputs: {{ etcd_log_outputs }}
 
 # Available from v3.4.
 # Configures log level. Only supports debug, info, warn, error, panic, or fatal.
-# ‘default’ use ‘info’.
+# 'default' use 'info'.
 # default: info
 log-level: {{ etcd_log_level }}
 
@@ -337,7 +337,7 @@ version: {{ etcd_version }}
 # default: false
 enable-pprof: {{ etcd_enable_pprof }}
 
-# Set level of detail for exported metrics, specify ‘extensive’ to include server side grpc
+# Set level of detail for exported metrics, specify 'extensive' to include server side grpc
 # histogram metrics.
 # default: basic
 metrics: {{ etcd_metrics }}
@@ -350,13 +350,13 @@ listen-metrics-urls: {{ etcd_listen_metrics_urls }}
 
 # Specify a token type and token specific options, especially for JWT. Its format is
 # "type,var1=val1,var2=val2,…".
-# Possible type is ‘simple’ or ‘jwt’. Possible variables are ‘sign-method’ for specifying a sign
-# method of jwt (its possible values are ‘ES256’, ‘ES384’, ‘ES512’, ‘HS256’, ‘HS384’, ‘HS512’,
-# ‘RS256’, ‘RS384’, ‘RS512’, ‘PS256’, ‘PS384’, or ‘PS512’), ‘pub-key’ for specifying a path to a
-# public key for verifying jwt, ‘priv-key’ for specifying a path to a private key for signing jwt,
-# and ‘ttl’ for specifying TTL of jwt tokens.
+# Possible type is 'simple' or 'jwt'. Possible variables are 'sign-method' for specifying a sign
+# method of jwt (its possible values are 'ES256', 'ES384', 'ES512', 'HS256', 'HS384', 'HS512',
+# 'RS256', 'RS384', 'RS512', 'PS256', 'PS384', or 'PS512'), 'pub-key' for specifying a path to a
+# public key for verifying jwt, 'priv-key' for specifying a path to a private key for signing jwt,
+# and 'ttl' for specifying TTL of jwt tokens.
 #
-# For asymmetric algorithms (‘RS’, ‘PS’, ‘ES’), the public key is optional, as the private key
+# For asymmetric algorithms ('RS', 'PS', 'ES'), the public key is optional, as the private key
 # contains enough information to both sign and verify tokens.
 # default: "simple"
 auth-token: {{ etcd_auth_token }}
@@ -369,7 +369,7 @@ bcrypt-cost: {{ etcd_bcrypt_cost }}
 ## Experimental flags
 
 # Duration of time between cluster corruption check passes
-# default: 0s
+# default (sec): 0
 experimental-corrupt-check-time: {{ etcd_experimental_corrupt_check_time }}
 
 # Sets the maximum revisions deleted in each compaction batch.

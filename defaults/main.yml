@@ -36,9 +36,9 @@ etcd_backend_bbolt_freelist_type: ""
 etcd_backend_batch_interval: 0
 etcd_max_txn_ops: 128
 etcd_max_request_bytes: 1572864
-etcd_grpc_keepalive_min_time: 5s
-etcd_grpc_keepalive_interval: 2h
-etcd_grpc_keepalive_timeout: 20s
+etcd_grpc_keepalive_min_time: 5
+etcd_grpc_keepalive_interval: 7200
+etcd_grpc_keepalive_timeout: 20
 # Clustering flags
 etcd_initial_advertise_peer_urls: "{{ etcd_peer_protocol }}://{{ hostvars[inventory_hostname]['ansible_facts']['default_ipv4']['address'] }}:{{ etcd_peer_port }}"
 etcd_initial_cluster: "{% for host in groups[etcd_default_inventory_group] %}{{ hostvars[host]['ansible_facts']['hostname'] }}={{ etcd_peer_protocol }}://{{ hostvars[host]['ansible_facts']['default_ipv4']['address'] }}:{{ etcd_peer_port }}{% if not loop.last %},{% endif %}{% endfor %}"
@@ -55,7 +55,7 @@ etcd_auto_compaction_retention: 0
 etcd_auto_compaction_mode: periodic
 etcd_enable_v2: 'false'
 # Proxy flags
-etcd_proxy: off
+etcd_proxy: 'off'
 etcd_proxy_failure_wait: 5000
 etcd_proxy_refresh_interval: 30000
 etcd_proxy_dial_timeout: 1000
@@ -79,8 +79,8 @@ etcd_peer_cert_allowed_cn: ""
 etcd_peer_cert_allowed_hostname: ""
 etcd_cipher_suites: ""
 # Logging flags
-etcd_logger: capnslog
-etcd_log_outputs: default
+etcd_logger: zap
+etcd_log_outputs: '[stderr]'
 etcd_log_level: info
 etcd_debug: 'false'
 etcd_log_package_levels: ""
@@ -97,6 +97,6 @@ etcd_listen_metrics_urls: ""
 etcd_auth_token: simple
 etcd_bcrypt_cost: 10
 # Experimental flags
-etcd_experimental_corrupt_check_time: 0s
+etcd_experimental_corrupt_check_time: 0
 etcd_experimental_compaction_batch_limit: 1000
 etcd_experimental_peer_skip_client_san_verification: 'false'
