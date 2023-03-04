@@ -12,4 +12,4 @@
   tasks:
     - name: "Include etcd_cluster"
       include_role:
-        name: "bissquit.etcd_cluster"
+        name: "cloud_labs.etcd_cluster"
