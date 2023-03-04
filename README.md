@@ -1,17 +1,22 @@
 Role Name
 =========
 
-Ansible role for managing and configuring etcd cluster
+Ansible role for managing and configuring etcd cluster (**not standalone instance!**)
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+ETCD binaries should be installed on the target instances
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Variables are divided into two types (all of them you could find in [defaults/main.yml](defaults/main.yml).):
+- role variables
+  
+  There is only one variable to be commented - `etcd_default_inventory_group`. Use it to set etcd cluster group name from your inventory. It's required to enumerate all hosts inside cluster to set `initial-cluster` option (variable `etcd_initial_cluster`)
+  
+- etcd configuration variables - read [Configuration options](https://etcd.io/docs/v3.4/op-guide/configuration/) 
 
 Dependencies
 ------------
@@ -21,11 +26,14 @@ A list of other roles hosted on Galaxy should go here, plus any details in regar
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+You may use any Ansible role to install ETCD. I recommend using `andrewrothstein.etcd` role
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yaml
+- hosts: etcd
+  roles:
+     - { role: andrewrothstein.etcd }
+     - { role: cloud_labs.etcd_cluster }
+```
 
 License
 -------
@@ -35,4 +43,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Cloud Labs shared roles
