@@ -1,5 +1,14 @@
 ---
 
+- name: Obtain etcd version
+  ansible.builtin.shell: |
+    etcd --version | awk '/etcd/{print $3}'
+  register: version
+
+- name: Check if etcd version is not lower than 3.5
+  ansible.builtin.assert:
+    that: version.stdout is version('3.5.0', '>=')
+
 - name: Check etcd_cert_file is defined properly
   ansible.builtin.assert:
     that:
