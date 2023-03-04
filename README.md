@@ -42,7 +42,6 @@ You may use any Ansible role to install ETCD but we recommend you the following:
 Example Playbook
 ----------------
 
-You can also find role usage examples in converge playbooks from `molecule/` direcotry. Here is another example:
 
 ```yaml
 - hosts: etcd
