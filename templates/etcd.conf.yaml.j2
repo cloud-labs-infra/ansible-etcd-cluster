@@ -204,72 +204,74 @@ proxy-read-timeout: {{ etcd_proxy_read_timeout }}
 
 ## Security flags
 
-# DEPRECATED
-# Path to the client server TLS CA file. --ca-file ca.crt could be replaced by --trusted-ca-file ca.crt
-# --client-cert-auth and etcd will perform the same.
-# default: ""
-# ca-file:
+client-transport-security:
+  # DEPRECATED
+  # Path to the client server TLS CA file. --ca-file ca.crt could be replaced by --trusted-ca-file ca.crt
+  # --client-cert-auth and etcd will perform the same.
+  # default: ""
+  # ca-file:
 
-# Path to the client server TLS cert file.
-# default: ""
-cert-file: {{ etcd_cert_file }}
+  # Path to the client server TLS cert file.
+  # default: ""
+  cert-file: {{ etcd_cert_file }}
 
-# Path to the client server TLS key file.
-# default: ""
-key-file: {{ etcd_key_file }}
+  # Path to the client server TLS key file.
+  # default: ""
+  key-file: {{ etcd_key_file }}
 
-# Enable client cert authentication.
-# CN authentication is not supported by gRPC-gateway.
-# default: false
-client-cert-auth: {{ etcd_client_cert_auth }}
+  # Enable client cert authentication.
+  # CN authentication is not supported by gRPC-gateway.
+  # default: false
+  client-cert-auth: {{ etcd_client_cert_auth }}
 
-# Path to the client certificate revocation list file.
-# default: ""
-client-crl-file: {{ etcd_client_crl_file }}
+  # Path to the client certificate revocation list file.
+  # default: ""
+  client-crl-file: {{ etcd_client_crl_file }}
 
-# Allowed TLS name for client cert authentication.
-# default: ""
-client-cert-allowed-hostname: {{ etcd_client_cert_allowed_hostname }}
+  # Allowed TLS name for client cert authentication.
+  # default: ""
+  client-cert-allowed-hostname: {{ etcd_client_cert_allowed_hostname }}
 
-# Path to the client server TLS trusted CA cert file.
-# default: ""
-trusted-ca-file: {{ etcd_trusted_ca_file }}
+  # Path to the client server TLS trusted CA cert file.
+  # default: ""
+  trusted-ca-file: {{ etcd_trusted_ca_file }}
 
-# Client TLS using generated certificates
-# default: false
-auto-tls: {{ etcd_auto_tls }}
+  # Client TLS using generated certificates
+  # default: false
+  auto-tls: {{ etcd_auto_tls }}
 
-# DEPRECATED
-# Path to the peer server TLS CA file. --peer-ca-file ca.crt could be replaced by --peer-trusted-ca-file
-# ca.crt --peer-client-cert-auth and etcd will perform the same.
-# default: ""
-#peer-ca-file:
+peer-transport-security:
+  # DEPRECATED
+  # Path to the peer server TLS CA file. --peer-ca-file ca.crt could be replaced by --peer-trusted-ca-file
+  # ca.crt --peer-client-cert-auth and etcd will perform the same.
+  # default: ""
+  #peer-ca-file:
 
-# Path to the peer server TLS cert file. This is the cert for peer-to-peer traffic, used both for
-# server and client.
-# default: ""
-peer-cert-file: {{ etcd_peer_cert_file }}
+  # Path to the peer server TLS cert file. This is the cert for peer-to-peer traffic, used both for
+  # server and client.
+  # default: ""
+  cert-file: {{ etcd_peer_cert_file }}
 
-# Path to the peer server TLS key file. This is the key for peer-to-peer traffic, used both for
-# server and client.
-# default: ""
-peer-key-file: {{ etcd_peer_key_file }}
+  # Path to the peer server TLS key file. This is the key for peer-to-peer traffic, used both for
+  # server and client.
+  # default: ""
+  key-file: {{ etcd_peer_key_file }}
 
-# Enable peer client cert authentication.
-# default: false
-peer-client-cert-auth: {{ etcd_peer_client_cert_auth }}
+  # Enable peer client cert authentication.
+  # default: false
+  client-cert-auth: {{ etcd_peer_client_cert_auth }}
 
-# Path to the peer certificate revocation list file.
-# default: ""
-peer-crl-file: {{ etcd_peer_crl_file }}
+  # Path to the peer certificate revocation list file.
+  # default: ""
+  crl-file: {{ etcd_peer_crl_file }}
 
-# Path to the peer server TLS trusted CA file.
-# default: ""
-peer-trusted-ca-file: {{ etcd_peer_trusted_ca_file }}
+  # Path to the peer server TLS trusted CA file.
+  # default: ""
+  trusted-ca-file: {{ etcd_peer_trusted_ca_file }}
 
-# Peer TLS using generated certificates
-# default: false
-peer-auto-tls: {{ etcd_peer_auto_tls }}
+  # Peer TLS using generated certificates
+  # default: false
+  auto-tls: {{ etcd_peer_auto_tls }}
 
 # Allowed CommonName for inter peer authentication.
 # default: ""
