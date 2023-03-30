@@ -1,4 +1,4 @@
-Role Name
+ansible-etcd-cluster
 =========
 
 Ansible role for managing and configuring etcd cluster (**not standalone instance!**)
@@ -6,7 +6,9 @@ Ansible role for managing and configuring etcd cluster (**not standalone instanc
 Requirements
 ------------
 
-ETCD binaries should be installed on the target instances
+- ETCD binaries should be installed on the target instances
+- ETCD supported version is **3.5** or higher
+- `iproute2` package to collect network facts for Debian-like OS
 
 Role Variables
 --------------
@@ -21,18 +23,30 @@ Variables are divided into two types (all of them you could find in [defaults/ma
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+You may use any Ansible role to install ETCD but we recommend you the following:
+
+- [andrewrothstein.etcd](https://galaxy.ansible.com/andrewrothstein/etcd)
 
 Example Playbook
 ----------------
 
-You may use any Ansible role to install ETCD. I recommend using `andrewrothstein.etcd` role
+You can also find role usage examples in converge playbooks from `molecule/` direcotry. Here is another example:
 
 ```yaml
 - hosts: etcd
   roles:
      - { role: andrewrothstein.etcd }
-     - { role: cloud_labs.etcd_cluster }
+     - { role: ansible-etcd-cluster }
+```
+
+And also `requirements.yml`:
+
+```yaml
+- name: andrewrothstein.etcd
+
+- name: ansible-etcd-cluster
+  scm: git
+  src: https://github.com/cloud-labs-infra/ansible-etcd-cluster.git
 ```
 
 License

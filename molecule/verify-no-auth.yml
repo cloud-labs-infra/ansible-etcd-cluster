@@ -1,0 +1,21 @@
+---
+
+- name: Check request results etcd
+  block:
+    - name: send put request
+      ansible.builtin.shell:
+        etcdctl put foo bar
+      register: etcd_put_reply
+
+    - name: print put request reply
+      ansible.builtin.debug:
+        var: etcd_put_reply
+
+    - name: send get request
+      ansible.builtin.shell:
+        etcdctl get foo
+      register: etcd_get_reply
+
+    - name: print get request reply
+      ansible.builtin.debug:
+        var: etcd_get_reply
