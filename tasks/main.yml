@@ -4,9 +4,6 @@
 - ansible.builtin.include_tasks:
     file: preflight.yml
 
-- ansible.builtin.include_tasks:
-    file: environment.yml
-
 - name: Create {{ etcd_user }} system group
   ansible.builtin.group:
     name: "{{ etcd_group }}"

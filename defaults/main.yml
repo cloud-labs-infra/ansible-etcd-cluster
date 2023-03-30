@@ -9,11 +9,9 @@ etcd_default_inventory_group: etcd
 etcd_client_port: 2379
 etcd_peer_port: 2380
 etcd_bin_path: /usr/local/bin/etcd
-#etcd_client_protocol: "http{% if etcd_cert_file is defined and etcd_key_file is defined %}s{% endif %}"
-etcd_client_protocol: http
-#etcd_peer_protocol: "http{% if etcd_peer_cert_file is defined and etcd_peer_key_file is defined %}s{% endif %}"
-etcd_peer_protocol: http
-
+etcd_client_protocol: "http{% if etcd_cert_file != '' and etcd_key_file != '' %}s{% endif %}"
+etcd_peer_protocol: "http{% if etcd_peer_cert_file != '' and etcd_peer_key_file != '' %}s{% endif %}"
+etcd_remote_cert_files: []
 
 ## ETCD configuration variables
 
