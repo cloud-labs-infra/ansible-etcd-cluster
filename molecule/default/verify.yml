@@ -6,3 +6,5 @@
   gather_facts: false
   tasks:
     - include: ../verify.yml
+
+    - include: ../verify-no-auth.yml

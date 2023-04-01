@@ -1,6 +1,6 @@
 galaxy_info:
   role_name: etcd_cluster
-  author: bissquit
+  author: cloud_labs
   description: Ansible role for managing and configuring etcd cluster
   company: Cloud Labs Shared Infrastructure
 
