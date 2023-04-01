@@ -5,7 +5,7 @@
     get_url:
       validate_certs: false
   become: yes
-  gather_facts: true
+  gather_facts: false
   vars:
     # ansible-etcd-cluster-certificates role related variables
     etcd_cert_dir: /etc/ssl/private
@@ -24,6 +24,8 @@
         name:
           - iproute2  # provides network facts
         update_cache: true
+    - name: Collect facts
+      ansible.builtin.setup:
   roles:
     - { role: andrewrothstein.etcd }
     - { role: andrewrothstein.cfssl }
