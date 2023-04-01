@@ -15,7 +15,7 @@
     state: present
     system: yes
 
-- name: Prepare directories
+- name: Create directories
   ansible.builtin.file:
     state: directory
     path: "{{ item }}"
@@ -26,7 +26,7 @@
     - "{{ etcd_conf_dir }}"
     - "{{ etcd_data_dir }}"
 
-- name: Copy certificate files from remote folder to etcd dir on the same host
+- name: Copy certificate files from remote folder to {{ etcd_conf_dir }} dir on the same host
   ansible.builtin.copy:
     src: "{{ item }}"
     remote_src: yes
@@ -48,7 +48,7 @@
     - etcd.conf.yaml
   notify: restart etcd service
 
-- name: Copy systemd template
+- name: Copy systemd unit template
   ansible.builtin.template:
     src: etcd.service.j2
     dest: /etc/systemd/system/etcd.service
@@ -56,4 +56,3 @@
     group: root
     mode: 0644
   notify: restart etcd service
-
