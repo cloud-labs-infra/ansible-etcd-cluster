@@ -37,17 +37,6 @@
   loop: "{{ etcd_remote_cert_files }}"
   when: etcd_remote_cert_files != []
 
-- name: Copy configuration
-  ansible.builtin.template:
-    src: "{{ item }}.j2"
-    dest: '{{ etcd_conf_dir }}/{{ item }}'
-    owner: '{{ etcd_user }}'
-    group: '{{ etcd_group }}'
-    mode: 0644
-  loop:
-    - etcd.conf.yaml
-  notify: restart etcd service
-
 - name: Copy systemd unit template
   ansible.builtin.template:
     src: etcd.service.j2
