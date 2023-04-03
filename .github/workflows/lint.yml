@@ -13,8 +13,8 @@ jobs:
     - name: Set Up Git repository
       uses: actions/checkout@v3
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+    - name: Setup upterm session
+      uses: lhotari/action-upterm@v1
 
     - name: Set Up Python 3.9
       uses: actions/setup-python@v2
