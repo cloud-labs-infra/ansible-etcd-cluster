@@ -10,6 +10,9 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
+    - name: Run Docker on tmpfs
+      uses: JonasAlfredsson/docker-on-tmpfs@v1
+
     - name: Set Up Git repository
       uses: actions/checkout@v3
 
