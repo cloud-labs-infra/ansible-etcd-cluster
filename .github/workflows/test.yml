@@ -26,9 +26,6 @@ jobs:
       run: |
         stat -c %T -f /sys/fs/cgroup
 
-    - name: Setup upterm session
-      uses: lhotari/action-upterm@v1
-
     - name: Run tests
       run: |
         molecule test --all
