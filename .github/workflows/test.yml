@@ -8,14 +8,8 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-    - name: Run Docker on tmpfs
-      uses: JonasAlfredsson/docker-on-tmpfs@v1
-      with:
-        tmpfs_size: 5
-        swap_size: 4
-        swap_location: '/mnt/swapfile'
 
     - name: Set Up Git repository
       uses: actions/checkout@v3
@@ -27,9 +21,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
-
-    - name: Setup upterm session
-      uses: lhotari/action-upterm@v1
 
     - name: Run tests
       run: |
