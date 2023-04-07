@@ -18,11 +18,15 @@
 
 # example how to handle and debug errors
 - name: Debug systemd unit if it's failed
+  when: etcd_state.failed is true
   block:
     - name: Debug etcd using journalctl
       ansible.builtin.shell: |
-        journalctl -xe | tail -n 100
+        set -o pipefail && journalctl -xe | tail -n 100
+      args:
+        executable: /bin/bash
       register: etcd_journalctl
+      changed_when: False
 
     - name: Print journalctl output
       ansible.builtin.debug:
@@ -31,4 +35,3 @@
     - name: Raise error
       ansible.builtin.fail:
         msg: Tests failed due to systemd unit state issue
-  when: etcd_state.failed is true

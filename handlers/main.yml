@@ -1,7 +1,7 @@
 # handlers/main.yml
 ---
 
-- name: restart etcd service
+- name: Restart etcd service
   ansible.builtin.systemd:
     name: etcd
     state: restarted

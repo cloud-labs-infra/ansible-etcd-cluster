@@ -1,8 +1,10 @@
 # tasks/main.yml
 ---
 
-- ansible.builtin.include_tasks:
+- name: Include preflight
+  ansible.builtin.include_tasks:
     file: preflight.yml
 
-- ansible.builtin.include_tasks:
+- name: Include configure
+  ansible.builtin.include_tasks:
     file: configure.yml

@@ -2,20 +2,22 @@
 
 - name: Check request results etcd
   block:
-    - name: send put request
-      ansible.builtin.shell:
+    - name: Send put request
+      ansible.builtin.command:
         etcdctl put foo bar
       register: etcd_put_reply
+      changed_when: False
 
-    - name: print put request reply
+    - name: Print put request reply
       ansible.builtin.debug:
         var: etcd_put_reply
 
-    - name: send get request
-      ansible.builtin.shell:
+    - name: Send get request
+      ansible.builtin.command:
         etcdctl get foo
       register: etcd_get_reply
+      changed_when: False
 
-    - name: print get request reply
+    - name: Print get request reply
       ansible.builtin.debug:
         var: etcd_get_reply

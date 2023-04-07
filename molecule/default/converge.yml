@@ -29,5 +29,5 @@
     #    - name: clear facts
     #  meta: clear_facts
     - name: "Include etcd_cluster"
-      include_role:
+      ansible.builtin.include_role:
         name: "cloud_labs.etcd_cluster"

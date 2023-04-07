@@ -4,6 +4,10 @@
   hosts: all
   gather_facts: false
   tasks:
-    - include: ../verify.yml
+    - name: Include verify
+      ansible.builtin.include_tasks:
+        file: ../verify.yml
 
-    - include: ../verify-no-auth.yml
+    - name: Include verify-no-auth
+      ansible.builtin.include_tasks:
+        file: ../verify-no-auth.yml

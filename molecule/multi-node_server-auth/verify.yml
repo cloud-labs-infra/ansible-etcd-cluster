@@ -9,30 +9,38 @@
     # ansible-etcd-cluster-certificates role related variables
     etcd_cert_dir: /etc/ssl/private
   tasks:
-    - include: ../verify.yml
+    - name: Include verify
+      ansible.builtin.include_tasks:
+        file: ../verify.yml
 
     - name: Try to operate storage
+      delegate_to: "{{ groups[etcd_default_inventory_group][0] }}"
+      when: inventory_hostname == groups[etcd_default_inventory_group][0]
       block:
         - name: Generate random key
           ansible.builtin.set_fact:
             etcd_random_key: |
               {{ lookup('community.general.random_string', special=false) }}
 
-        - name: Put value from {{ groups[etcd_default_inventory_group][1] }} node
-          shell: |
-            echo value | \
+        - name: Put value from node {{ groups[etcd_default_inventory_group][1] }}
+          ansible.builtin.shell: |
+            set -o pipefail && echo value | \
             etcdctl --cacert={{ etcd_cert_dir }}/ca.pem \
                     --cert={{ etcd_cert_dir }}/client.pem \
                     --key={{ etcd_cert_dir }}/client-key.pem \
                     --endpoints={{ hostvars[groups[etcd_default_inventory_group][1]]['ansible_default_ipv4']['address'] }}:{{ etcd_client_port }} \
                     put key-{{ etcd_random_key }}
+          args:
+            executable: /bin/bash
+          changed_when: False
 
-        - name: Get the same value from {{ groups[etcd_default_inventory_group][2] }} node
-          shell: |
-            etcdctl --cacert={{ etcd_cert_dir }}/ca.pem \
+        - name: Get the same value from node {{ groups[etcd_default_inventory_group][2] }}
+          ansible.builtin.shell: |
+            set -o pipefail && etcdctl --cacert={{ etcd_cert_dir }}/ca.pem \
                     --cert={{ etcd_cert_dir }}/client.pem \
                     --key={{ etcd_cert_dir }}/client-key.pem \
                     --endpoints={{ hostvars[groups[etcd_default_inventory_group][2]]['ansible_default_ipv4']['address'] }}:{{ etcd_client_port }} \
                     get key-{{ etcd_random_key }}
-      delegate_to: "{{ groups[etcd_default_inventory_group][0] }}"
-      when: inventory_hostname == groups[etcd_default_inventory_group][0]
+          args:
+            executable: /bin/bash
+          changed_when: False
