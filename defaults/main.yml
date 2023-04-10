@@ -79,7 +79,7 @@ etcd_peer_trusted_ca_file: ""
 etcd_peer_auto_tls: 'false'
 etcd_peer_cert_allowed_cn: ""
 etcd_peer_cert_allowed_hostname: ""
-etcd_cipher_suites: ""
+etcd_cipher_suites: "TLS_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256"
 etcd_cors: "\"*\""
 etcd_host_whitelist: "\"*\""
 # Logging flags
