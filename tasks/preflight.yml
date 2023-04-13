@@ -4,6 +4,7 @@
   ansible.builtin.shell: |
     etcd --version | awk '/etcd/{print $3}'
   register: version
+  changed_when: False
 
 - name: Check if etcd version is not lower than 3.5
   ansible.builtin.assert:
