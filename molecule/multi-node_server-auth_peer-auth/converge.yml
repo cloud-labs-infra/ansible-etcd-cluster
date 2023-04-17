@@ -35,9 +35,9 @@
     - name: Collect facts
       ansible.builtin.setup:
   roles:
-#    - { role: andrewrothstein.etcd }
-#    - { role: andrewrothstein.cfssl }
-#    - { role: ansible-etcd-cluster-certificates }
+    - { role: andrewrothstein.etcd }
+    - { role: andrewrothstein.cfssl }
+    - { role: ansible-etcd-cluster-certificates }
   tasks:
     - name: "Include etcd_cluster"
       include_role:
