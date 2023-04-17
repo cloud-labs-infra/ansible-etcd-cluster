@@ -6,5 +6,5 @@
 
 - name: ansible-etcd-cluster-certificates
   scm: git
-  version: 7ee941fc1cf69ec4324db7096091c5cca8f6523e
+  version: a268bb4  # 0.2.0
   src: https://github.com/cloud-labs-infra/ansible-etcd-cluster-certificates.git
