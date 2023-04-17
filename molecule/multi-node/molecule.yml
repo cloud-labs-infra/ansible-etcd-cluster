@@ -28,5 +28,7 @@ platforms:
     hostname: etcd-instance-03
 provisioner:
   name: ansible
+  playbooks:
+    converge: ../default/converge.yml
 verifier:
   name: ansible
