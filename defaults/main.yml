@@ -23,7 +23,7 @@ etcd_snapshot_count: 100000
 etcd_heartbeat_interval: 100
 etcd_election_timeout: 1000
 etcd_initial_election_tick_advance: 'true'
-etcd_listen_peer_urls: "{{ etcd_peer_protocol }}://{{ hostvars[inventory_hostname]['ansible_facts']['default_ipv4']['address'] }}:{{ etcd_peer_port }},{{ etcd_peer_protocol }}://127.0.0.1:{{ etcd_peer_port }}"
+etcd_listen_peer_urls: "{{ etcd_peer_protocol }}://{{ hostvars[inventory_hostname]['ansible_facts']['default_ipv4']['address'] }}:{{ etcd_peer_port }}"
 etcd_listen_client_urls: "{{ etcd_client_protocol }}://{{ hostvars[inventory_hostname]['ansible_facts']['default_ipv4']['address'] }}:{{ etcd_client_port }},{{ etcd_client_protocol }}://127.0.0.1:{{ etcd_client_port }}"
 etcd_max_snapshots: 5
 etcd_max_wals: 5
@@ -74,7 +74,7 @@ etcd_peer_cert_file: ""
 etcd_peer_key_file: ""
 etcd_peer_client_cert_auth: 'false'
 etcd_self_signed_cert_validity: 1
-etcd_peer_crl_file: 'false'
+etcd_peer_crl_file: ''
 etcd_peer_trusted_ca_file: ""
 etcd_peer_auto_tls: 'false'
 etcd_peer_cert_allowed_cn: ""
