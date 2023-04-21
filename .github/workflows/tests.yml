@@ -1,7 +1,6 @@
 name: "ansible-etcd-cluster: lint"
 
 on:
-  push:
   pull_request:
     branches:
       - 'main'
@@ -31,7 +30,7 @@ jobs:
     - name: Run lint
       run: |
         molecule lint
-        
+
     # Will test every scenario with test_sequence from ../../molecule/default/molecule.yml
     - name: Run tests
       run: |
