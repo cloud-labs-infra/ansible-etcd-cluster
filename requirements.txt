@@ -1,8 +1,4 @@
 ansible
-<<<<<<< HEAD
-molecule
-=======
 molecule==4.0.4
->>>>>>> origin/main
 molecule-docker
 ansible-lint
