@@ -27,11 +27,8 @@ jobs:
         env
         [[ $(stat -c %T -f /sys/fs/cgroup) != "cgroup2fs" ]]
 
-    - name: Run lint
-      run: |
-        molecule lint
-
     # Will test every scenario with test_sequence from ../../molecule/default/molecule.yml
     - name: Run tests
       run: |
+        molecule lint
         molecule test --all
