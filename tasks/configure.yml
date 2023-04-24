@@ -44,4 +44,4 @@
     owner: root
     group: root
     mode: 0644
-  notify: Restart etcd service
+  notify: restart etcd service

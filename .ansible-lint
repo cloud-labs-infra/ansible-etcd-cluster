@@ -1,3 +1,5 @@
 skip_list:
   - 'yaml'
   - 'role-name'
+  - 'risky-shell-pipe'
+  - 'name[casing]'

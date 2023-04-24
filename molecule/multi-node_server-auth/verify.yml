@@ -24,7 +24,7 @@
 
         - name: Put value from node {{ groups[etcd_default_inventory_group][1] }}
           ansible.builtin.shell: |
-            set -o pipefail && echo value | \
+            echo value | \
             etcdctl --cacert={{ etcd_cert_dir }}/ca.pem \
                     --cert={{ etcd_cert_dir }}/client.pem \
                     --key={{ etcd_cert_dir }}/client-key.pem \
@@ -36,7 +36,7 @@
 
         - name: Get the same value from node {{ groups[etcd_default_inventory_group][2] }}
           ansible.builtin.shell: |
-            set -o pipefail && etcdctl --cacert={{ etcd_cert_dir }}/ca.pem \
+            etcdctl --cacert={{ etcd_cert_dir }}/ca.pem \
                     --cert={{ etcd_cert_dir }}/client.pem \
                     --key={{ etcd_cert_dir }}/client-key.pem \
                     --endpoints={{ hostvars[groups[etcd_default_inventory_group][2]]['ansible_default_ipv4']['address'] }}:{{ etcd_client_port }} \

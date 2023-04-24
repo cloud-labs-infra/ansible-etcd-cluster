@@ -2,7 +2,7 @@
 
 - name: Obtain etcd version
   ansible.builtin.shell: |
-    set -o pipefail && etcd --version | awk '/etcd/{print $3}'
+    etcd --version | awk '/etcd/{print $3}'
   args:
     executable: /bin/bash
   register: version

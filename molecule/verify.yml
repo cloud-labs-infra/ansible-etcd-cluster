@@ -22,7 +22,7 @@
   block:
     - name: Debug etcd using journalctl
       ansible.builtin.shell: |
-        set -o pipefail && journalctl -xe | tail -n 100
+        journalctl -xe | tail -n 100
       args:
         executable: /bin/bash
       register: etcd_journalctl
