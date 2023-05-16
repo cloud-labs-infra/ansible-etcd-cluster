@@ -3,6 +3,8 @@
 - name: Obtain etcd version
   ansible.builtin.shell: |
     etcd --version | awk '/etcd/{print $3}'
+  args:
+    executable: /bin/bash
   register: version
   changed_when: False
 

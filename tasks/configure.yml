@@ -1,12 +1,12 @@
 ---
 
-- name: Create {{ etcd_user }} system group
+- name: Create system group {{ etcd_user }}
   ansible.builtin.group:
     name: "{{ etcd_group }}"
     state: present
     system: yes
 
-- name: Create {{ etcd_group }} system user
+- name: Create system user {{ etcd_group }}
   ansible.builtin.user:
     name: "{{ etcd_user }}"
     groups: "{{ etcd_group }}"
@@ -26,7 +26,7 @@
     - "{{ etcd_conf_dir }}"
     - "{{ etcd_data_dir }}"
 
-- name: Copy certificate files from remote folder to {{ etcd_conf_dir }} dir on the same host
+- name: Copy certificate files from remote folder on the same host to dir {{ etcd_conf_dir }}
   ansible.builtin.copy:
     src: "{{ item }}"
     remote_src: yes
