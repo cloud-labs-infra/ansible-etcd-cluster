@@ -7,7 +7,7 @@
   become: yes
   gather_facts: false
   vars:
-    # ansible-etcd-cluster-certificates role related variables
+    # cloudlabsinfra.etcd_cluster_certificates role related variables
     etcd_cert_dir: /etc/ssl/private
     # ansible-etcd-cluster role related variables
     # client/server
@@ -37,7 +37,7 @@
   roles:
     - { role: andrewrothstein.etcd }
     - { role: andrewrothstein.cfssl }
-    - { role: ansible-etcd-cluster-certificates }
+    - { role: cloudlabsinfra.etcd_cluster_certificates }
   tasks:
     - name: "Include etcd_cluster"
       ansible.builtin.include_role:

@@ -6,7 +6,7 @@
   vars:
     etcd_default_inventory_group: etcd
     etcd_client_port: 2379
-    # ansible-etcd-cluster-certificates role related variables
+    # cloudlabsinfra.etcd_cluster_certificates role related variables
     etcd_cert_dir: /etc/ssl/private
   tasks:
     - name: Include verify
