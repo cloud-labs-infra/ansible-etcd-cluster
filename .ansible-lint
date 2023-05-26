@@ -1,3 +1,4 @@
+# https://ansible-lint.readthedocs.io/rules/
 skip_list:
   - 'yaml'
   - 'role-name'
