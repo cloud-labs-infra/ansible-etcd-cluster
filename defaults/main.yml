@@ -97,7 +97,7 @@ etcd_experimental_distributed_tracing_service_name: 'etcd'
 etcd_experimental_distributed_tracing_instance_id: ''
 # Unsafe flags
 etcd_force_new_cluster: 'false'  # be careful changing this value!
-etcd_unsafe_no_fsync: 'false' # be careful changing this value!
+etcd_unsafe_no_fsync: 'false'  # be careful changing this value!
 # Miscellaneous flags
 etcd_version: 'false'
 etcd_config_file: /etc/etcd/etcd.conf.yaml  # this param won't be in config file, only in systemd unit

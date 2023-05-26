@@ -1,4 +1,5 @@
 ---
+
 dependency:
   name: galaxy
 driver:
@@ -9,7 +10,7 @@ driver:
     #  - subnet: '172.18.0.0/24'
 platforms:
   - name: etcd-instance-01
-    hostname: etcd-instance-01 
+    hostname: etcd-instance-01
     # custom docker images with systemd for molecule
     #   https://github.com/marciopaiva/molecule-systemd-images
     image: mpaivabarbosa/molecule-systemd-ubuntu:20.04
@@ -23,7 +24,7 @@ platforms:
     # if it is cgroup2fs, then change /etc/default/grub file, GRUB_CMDLINE_LINUX="systemd.unified_cgroup_hierarchy=0"
     # update grub (sudo update-grub), reboot system to eplly changes
     volumes:
-     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
     pre_build_image: true
     override_command: false
