@@ -14,7 +14,7 @@ platforms:
     security_opts:
       - seccomp=unconfined
     volumes:
-     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
     pre_build_image: true
     override_command: false
