@@ -16,7 +16,7 @@ etcd_remote_cert_files: []
 ## ETCD configuration variables
 
 # Member flags
-etcd_node_name: "{{ inventory_hostname }}"
+etcd_node_name: "{{ inventory_hostname.split('.')[0] }}"
 etcd_data_dir: /var/lib/etcd
 etcd_wal_dir: ''
 etcd_snapshot_count: 100000
