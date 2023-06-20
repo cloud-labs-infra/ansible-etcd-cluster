@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.0.1](https://github.com/cloud-labs-infra/ansible-etcd-cluster/compare/v1.0.0...v1.0.1) (2023-06-20)
+
+
+### Bug Fixes
+
+* change var etc_node_name so it takes left part of hostname ([#28](https://github.com/cloud-labs-infra/ansible-etcd-cluster/issues/28)) ([24c4459](https://github.com/cloud-labs-infra/ansible-etcd-cluster/commit/24c4459c717733b8f56a864ed72eda654f547a2c))
+
 ## 1.0.0 (2023-05-26)
 
 
